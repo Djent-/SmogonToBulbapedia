@@ -3,7 +3,7 @@
 // @namespace   djent-.SmogonToBulbapedia
 // @description Add links to Bulbapedia articles on Pokemon and moves to Smogon Strategy Dex pages.
 // @include     http://www.smogon.com/dex/*/pokemon/*/
-// @version     1
+// @version     1.1
 // ==/UserScript==
 
 var links = document.getElementsByTagName('a');
@@ -12,9 +12,8 @@ for (i=0; i<links.length; i++) {
   // check whether they link to /moves/
   var element = links[i];
   if (element.href.indexOf('/moves/') !== -1) {
-    var WikiSup = document.createElement('sup');
-    WikiSup.style.marginLeft = '5pt';
     var BulbapediaMoveLink = document.createElement('a');
+    BulbapediaMoveLink.style.marginLeft = '5px';
     var moveregexp = /http:(.+?)moves\/(.*)\//;
     var Move = element.href.replace(moveregexp, '$2');
     // Skip the link to the move database
@@ -27,9 +26,12 @@ for (i=0; i<links.length; i++) {
     Move = Move.replace(/_(\w)/, function(x){return x.toUpperCase();});
     Move = Move.replace(/^(\w)/, function(x){return x.toUpperCase();});
     BulbapediaMoveLink.href = 'http://bulbapedia.bulbagarden.net/wiki/' + Move + '_(move)';
-    WikiSup.appendChild(BulbapediaMoveLink);
-    BulbapediaMoveLink.appendChild(document.createTextNode('[Wiki]'));
-    element.parentNode.insertBefore(WikiSup, element.nextSibling);
+    var BulbapediaIco = document.createElement('IMG');
+    BulbapediaIco.src = 'http://bulbapedia.bulbagarden.net/favicon.ico';
+    BulbapediaIco.height = 15;
+    BulbapediaIco.width = 15;
+    BulbapediaMoveLink.appendChild(BulbapediaIco);
+    element.parentNode.insertBefore(BulbapediaMoveLink, element.nextSibling);
   }
 }
 
