@@ -38,12 +38,10 @@ for (i=0; i<links.length; i++) {
 var h1s = document.getElementsByTagName('h1');
 
 // Get the name of the Pokemon
-var address = document.location;
 var Pokemon = h1s[0].innerHTML;
 
-for (i=0; i<h1s.length; i++) {
+for (i=1; i<h1s.length; i++) {
   var element = h1s[i];
-  
   // There are a number of h1s on the page besides the ones identifying
   // particular setups.
   // The h1s I want are the ones with an export button as the previous sibling
