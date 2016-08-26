@@ -2,16 +2,18 @@
 // @name        Smogon Links to Bulbapedia
 // @namespace   djent-.SmogonToBulbapedia
 // @description Add links to Bulbapedia articles on Pokemon and moves to Smogon Strategy Dex pages.
-// @include     http://www.smogon.com/dex/*/pokemon/*/
+// @include     *://www.smogon.com/dex/*/pokemon/*/
 // @version     1.1
 // ==/UserScript==
 
-var links = document.getElementsByTagName('a');
+var links = document.getElementsByTagName('A');
+console.log("Found " + links.length + " links in document.");
 
 for (i=0; i<links.length; i++) {
   // check whether they link to /moves/
   var element = links[i];
   if (element.href.indexOf('/moves/') !== -1) {
+    console.log("Identified move link: "+element.href);
     var BulbapediaMoveLink = document.createElement('a');
     BulbapediaMoveLink.style.marginLeft = '5px';
     var moveregexp = /http:(.+?)moves\/(.*)\//;
